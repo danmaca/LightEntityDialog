@@ -29,6 +29,7 @@ export class LightEntityDialog extends LitElement {
 
   private _colorDebounceTimer: number | null = null;
   private _draggingColor = false;
+  private _lastColorChange: number = 0;
 
   private _boundOnDrag: (e: MouseEvent | TouchEvent) => void;
   private _boundOnDragEnd: () => void;
@@ -84,7 +85,8 @@ export class LightEntityDialog extends LitElement {
     }
 
     // Only update native picker state if user is NOT currently dragging
-    if (!this._draggingColor) {
+    // Also debounce HA return updates since RGB->HSV can be lossy and cause the marker to jump
+    if (!this._draggingColor && Date.now() - this._lastColorChange > 3000) {
       const rgb = this._getRgbFromAttributes(attrs);
       if (rgb) {
         this._setPickerFromRgb(rgb.r, rgb.g, rgb.b);
@@ -244,6 +246,7 @@ export class LightEntityDialog extends LitElement {
   }
 
   private _updateColorFromPicker() {
+    this._lastColorChange = Date.now();
     const s = this._markerX / 100;
     const v = (100 - this._markerY) / 100;
     const { r, g, b } = this._hsvToRgb(this._currentHue / 360, s, v);
@@ -297,6 +300,7 @@ export class LightEntityDialog extends LitElement {
   }
 
   private _pickSwatch(hex: string) {
+    this._lastColorChange = Date.now();
     const rgb = this._hexToRgb(hex);
     if (rgb) {
       this._setPickerFromRgb(rgb.r, rgb.g, rgb.b);
@@ -351,18 +355,12 @@ export class LightEntityDialog extends LitElement {
     ];
 
     return html`<div class="wrapper">
-      <div class="header">
-        <div class="title">${name}</div>
-        <div class="subtitle">${isOn ? "On" : "Off"}</div>
-        <button class="power" @click=${this._togglePower}>
-          ${isOn ? "Turn off" : "Turn on"}
-        </button>
-      </div>
+
 
       <div class="sliders-row">
         ${showColorTemp
           ? html`<div class="column color-temp-column">
-              <div class="label">${this._config.color_temp_label ?? "Teplota"}</div>
+
               <div class="slider-wrapper">
                 <ha-control-slider
                   .value=${tempValue}
@@ -386,7 +384,7 @@ export class LightEntityDialog extends LitElement {
           : nothing}
 
         <div class="column brightness-column">
-          <div class="label">${this._config.brightness_label ?? "Jas"}</div>
+
           <div class="slider-wrapper">
             <ha-control-slider
               .value=${this._brightnessPct ?? (isOn ? 100 : 0)}
@@ -397,11 +395,22 @@ export class LightEntityDialog extends LitElement {
           </div>
           <div class="value">${this._brightnessPct != null ? `${this._brightnessPct}%` : nothing}</div>
         </div>
+
+        <div class="column power-column">
+          <button class="power-btn" @click=${this._togglePower} title="Zapnout / Vypnout">
+            <svg viewBox="0 0 100 100" class="power-icon">
+              <!-- Background matched roughly to dark theme -->
+              <circle cx="50" cy="50" r="50" fill="#272727" />
+              <!-- Power symbol paths -->
+              <path d="M50 26 V52 M32 38 A 28 28 0 1 0 68 38" stroke=${isOn ? "#ffffff" : "#b0b0b0"} stroke-width="8" stroke-linecap="round" fill="none" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       ${showColor
         ? html`<div class="color-section">
-            <div class="label">${this._config.color_label ?? "Barva"}</div>
+
             
             <div class="native-coloris-picker">
               <div class="color-gradient" 
@@ -450,28 +459,7 @@ export class LightEntityDialog extends LitElement {
         flex-direction: column;
       }
 
-      .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        gap: 12px;
-      }
 
-      .title { font-size: 1.1rem; font-weight: 600; }
-      .subtitle { font-size: 0.9rem; opacity: 0.8; }
-
-      .power {
-        border: none;
-        border-radius: 999px;
-        padding: 6px 14px;
-        background: var(--accent-color, #03a9f4);
-        color: #ffffff;
-        font-size: 0.85rem;
-        cursor: pointer;
-      }
-
-      .power:hover { filter: brightness(1.1); }
 
       .sliders-row {
         display: grid;
@@ -491,6 +479,37 @@ export class LightEntityDialog extends LitElement {
 
       .brightness-column {
         grid-column: 2 / 3;
+      }
+
+      .power-column {
+        grid-column: 3 / 4;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .power-btn {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+        border-radius: 50%;
+        width: 80px; 
+        height: 80px; 
+        transition: transform 0.15s ease, filter 0.15s ease;
+      }
+
+      .power-btn:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+      }
+
+      .power-icon {
+        width: 100%;
+        height: 100%;
+        display: block;
       }
 
       .brightness-column ha-control-slider {
