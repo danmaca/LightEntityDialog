@@ -276,15 +276,18 @@ export class LightEntityDialog extends LitElement {
             ${this._config.brightness_label ?? "Jas"}
           </div>
           <div class="slider-wrapper">
-            <ha-slider
+            <ha-control-slider
+              .value=${this._brightnessPct ?? (isOn ? 100 : 0)}
               min="1"
               max="100"
-              .value=${this._brightnessPct ?? (isOn ? 100 : 0)}
               step="1"
+              mode="start"
               vertical
               show-handle
+              tooltip-position="left"
+              unit="%"
               @value-changed=${this._onBrightnessChange}
-            ></ha-slider>
+            ></ha-control-slider>
           </div>
           <div class="value">
             ${this._brightnessPct != null ? `${this._brightnessPct}%` : nothing}
@@ -391,31 +394,10 @@ export class LightEntityDialog extends LitElement {
     }
 
     .slider-wrapper {
-      height: 180px;
+      height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .brightness-column {
-      width: 80px;
-    }
-
-    .brightness-column .slider-wrapper {
-      width: 72px;
-      height: 260px;
-      border-radius: 36px;
-      background: #2d2f33;
-      padding: 20px 24px;
-      box-sizing: border-box;
-    }
-
-    .brightness-column ha-slider {
-      width: 100%;
-      height: 100%;
-      --slider-color: var(--accent-color, #ff9800);
-      --slider-secondary-color: transparent;
-      --slider-bar-color: transparent;
     }
 
     .color-wrapper {
