@@ -65,8 +65,11 @@ export class LightEntityDialog extends LitElement {
       this._brightnessPct = null;
     }
 
-    if (attrs.color_temp != null) {
-      this._colorTemp = attrs.color_temp;
+    if (typeof attrs.color_temp_kelvin === "number") {
+      this._colorTemp = attrs.color_temp_kelvin;
+    } else if (typeof attrs.color_temp === "number") {
+      // Fallback for older integrations still exposing mireds
+      this._colorTemp = Math.round(1_000_000 / attrs.color_temp);
     } else {
       this._colorTemp = null;
     }
@@ -154,11 +157,18 @@ export class LightEntityDialog extends LitElement {
     this._callService({ brightness_pct: value, transition: 0.2 });
   }
 
-  private _onColorTempChange(ev: Event): void {
-    const target = ev.target as HTMLInputElement;
-    const value = Number(target.value);
+  private _onColorTempChange(ev: Event | CustomEvent): void {
+    const detailValue =
+      (ev as CustomEvent).detail && (ev as CustomEvent).detail.value;
+    const target = ev.target as HTMLInputElement | null;
+    const value =
+      typeof detailValue === "number"
+        ? detailValue
+        : target
+        ? Number(target.value)
+        : 0;
     this._colorTemp = value;
-    this._callService({ color_temp: value, transition: 0.2 });
+    this._callService({ color_temp_kelvin: value, transition: 0.2 });
   }
 
   private _onColorChange(ev: Event): void {
@@ -190,7 +200,12 @@ export class LightEntityDialog extends LitElement {
 
   private _supportsColorTemp(entity: HomeAssistantEntityState): boolean {
     const attrs = entity.attributes;
-    if (attrs.color_temp != null) return true;
+    if (
+      typeof attrs.color_temp_kelvin === "number" ||
+      typeof attrs.color_temp === "number"
+    ) {
+      return true;
+    }
     const modes = attrs.supported_color_modes as string[] | undefined;
     return Array.isArray(modes) && modes.includes("color_temp");
   }
@@ -222,12 +237,18 @@ export class LightEntityDialog extends LitElement {
     const name = attrs.friendly_name || entity.entity_id;
     const isOn = entity.state === "on";
 
-    const minMireds =
-      this._config.min_mireds ??
-      (typeof attrs.min_mireds === "number" ? attrs.min_mireds : 153);
-    const maxMireds =
-      this._config.max_mireds ??
-      (typeof attrs.max_mireds === "number" ? attrs.max_mireds : 500);
+    const minKelvin =
+      typeof attrs.min_color_temp_kelvin === "number"
+        ? attrs.min_color_temp_kelvin
+        : typeof attrs.max_mireds === "number"
+        ? Math.round(1_000_000 / attrs.max_mireds)
+        : 2700;
+    const maxKelvin =
+      typeof attrs.max_color_temp_kelvin === "number"
+        ? attrs.max_color_temp_kelvin
+        : typeof attrs.min_mireds === "number"
+        ? Math.round(1_000_000 / attrs.min_mireds)
+        : 6500;
 
     const showColorTemp =
       this._config.show_color_temp !== false && this._supportsColorTemp(entity);
@@ -249,24 +270,21 @@ export class LightEntityDialog extends LitElement {
                 ${this._config.color_temp_label ?? "Teplota"}
               </div>
               <div class="slider-wrapper">
-                <input
-                  class="slider vertical"
-                  type="range"
-                  min=${minMireds}
-                  max=${maxMireds}
-                  .value=${String(
-                    this._colorTemp != null
-                      ? this._colorTemp
-                      : (minMireds + maxMireds) / 2
-                  )}
-                  step="1"
-                  @change=${this._onColorTempChange}
-                />
+                <ha-control-slider
+                  .value=${this._colorTemp ?? (minKelvin + maxKelvin) / 2}
+                  .min=${minKelvin}
+                  .max=${maxKelvin}
+                  step="50"
+                  mode="start"
+                  vertical
+                  show-handle
+                  tooltip-position="right"
+                  unit="K"
+                  @value-changed=${this._onColorTempChange}
+                ></ha-control-slider>
               </div>
               <div class="value">
-                ${this._colorTemp != null
-                  ? `${Math.round(1000000 / this._colorTemp)} K`
-                  : nothing}
+                ${this._colorTemp != null ? `${this._colorTemp} K` : nothing}
               </div>
             </div>`
           : nothing}
