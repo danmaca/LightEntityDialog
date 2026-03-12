@@ -1,247 +1,327 @@
-function t(t,e,s,i){var r,o=arguments.length,n=o<3?e:null===i?i=Object.getOwnPropertyDescriptor(e,s):i;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)n=Reflect.decorate(t,e,s,i);else for(var a=t.length-1;a>=0;a--)(r=t[a])&&(n=(o<3?r(n):o>3?r(e,s,n):r(e,s))||n);return o>3&&n&&Object.defineProperty(e,s,n),n}"function"==typeof SuppressedError&&SuppressedError;
+function t(t,e,i,s){var r,o=arguments.length,n=o<3?e:null===s?s=Object.getOwnPropertyDescriptor(e,i):s;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)n=Reflect.decorate(t,e,i,s);else for(var a=t.length-1;a>=0;a--)(r=t[a])&&(n=(o<3?r(n):o>3?r(e,i,n):r(e,i))||n);return o>3&&n&&Object.defineProperty(e,i,n),n}"function"==typeof SuppressedError&&SuppressedError;
 /**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const e=globalThis,s=e.ShadowRoot&&(void 0===e.ShadyCSS||e.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,i=Symbol(),r=new WeakMap;let o=class{constructor(t,e,s){if(this._$cssResult$=!0,s!==i)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(s&&void 0===t){const s=void 0!==e&&1===e.length;s&&(t=r.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&r.set(e,t))}return t}toString(){return this.cssText}};const n=s?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return(t=>new o("string"==typeof t?t:t+"",void 0,i))(e)})(t):t,{is:a,defineProperty:l,getOwnPropertyDescriptor:h,getOwnPropertyNames:c,getOwnPropertySymbols:d,getPrototypeOf:p}=Object,u=globalThis,_=u.trustedTypes,f=_?_.emptyScript:"",g=u.reactiveElementPolyfillSupport,m=(t,e)=>t,$={toAttribute(t,e){switch(e){case Boolean:t=t?f:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let s=t;switch(e){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t)}catch(t){s=null}}return s}},y=(t,e)=>!a(t,e),v={attribute:!0,type:String,converter:$,reflect:!1,useDefault:!1,hasChanged:y};
+const e=globalThis,i=e.ShadowRoot&&(void 0===e.ShadyCSS||e.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s=Symbol(),r=new WeakMap;let o=class{constructor(t,e,i){if(this._$cssResult$=!0,i!==s)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(i&&void 0===t){const i=void 0!==e&&1===e.length;i&&(t=r.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),i&&r.set(e,t))}return t}toString(){return this.cssText}};const n=(t,...e)=>{const i=1===t.length?t[0]:e.reduce((e,i,s)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+t[s+1],t[0]);return new o(i,t,s)},a=i?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const i of t.cssRules)e+=i.cssText;return(t=>new o("string"==typeof t?t:t+"",void 0,s))(e)})(t):t,{is:l,defineProperty:h,getOwnPropertyDescriptor:c,getOwnPropertyNames:d,getOwnPropertySymbols:p,getPrototypeOf:u}=Object,_=globalThis,g=_.trustedTypes,f=g?g.emptyScript:"",m=_.reactiveElementPolyfillSupport,b=(t,e)=>t,v={toAttribute(t,e){switch(e){case Boolean:t=t?f:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch(t){i=null}}return i}},$=(t,e)=>!l(t,e),y={attribute:!0,type:String,converter:v,reflect:!1,useDefault:!1,hasChanged:$};
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */Symbol.metadata??=Symbol("metadata"),u.litPropertyMetadata??=new WeakMap;let b=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=v){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const s=Symbol(),i=this.getPropertyDescriptor(t,s,e);void 0!==i&&l(this.prototype,t,i)}}static getPropertyDescriptor(t,e,s){const{get:i,set:r}=h(this.prototype,t)??{get(){return this[e]},set(t){this[e]=t}};return{get:i,set(e){const o=i?.call(this);r?.call(this,e),this.requestUpdate(t,o,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??v}static _$Ei(){if(this.hasOwnProperty(m("elementProperties")))return;const t=p(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(m("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(m("properties"))){const t=this.properties,e=[...c(t),...d(t)];for(const s of e)this.createProperty(s,t[s])}const t=this[Symbol.metadata];if(null!==t){const e=litPropertyMetadata.get(t);if(void 0!==e)for(const[t,s]of e)this.elementProperties.set(t,s)}this._$Eh=new Map;for(const[t,e]of this.elementProperties){const s=this._$Eu(t,e);void 0!==s&&this._$Eh.set(s,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const t of s)e.unshift(n(t))}else void 0!==t&&e.push(n(t));return e}static _$Eu(t,e){const s=e.attribute;return!1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const s of e.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((t,i)=>{if(s)t.adoptedStyleSheets=i.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const s of i){const i=document.createElement("style"),r=e.litNonce;void 0!==r&&i.setAttribute("nonce",r),i.textContent=s.cssText,t.appendChild(i)}})(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,s){this._$AK(t,s)}_$ET(t,e){const s=this.constructor.elementProperties.get(t),i=this.constructor._$Eu(t,s);if(void 0!==i&&!0===s.reflect){const r=(void 0!==s.converter?.toAttribute?s.converter:$).toAttribute(e,s.type);this._$Em=t,null==r?this.removeAttribute(i):this.setAttribute(i,r),this._$Em=null}}_$AK(t,e){const s=this.constructor,i=s._$Eh.get(t);if(void 0!==i&&this._$Em!==i){const t=s.getPropertyOptions(i),r="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:$;this._$Em=i;const o=r.fromAttribute(e,t.type);this[i]=o??this._$Ej?.get(i)??o,this._$Em=null}}requestUpdate(t,e,s,i=!1,r){if(void 0!==t){const o=this.constructor;if(!1===i&&(r=this[t]),s??=o.getPropertyOptions(t),!((s.hasChanged??y)(r,e)||s.useDefault&&s.reflect&&r===this._$Ej?.get(t)&&!this.hasAttribute(o._$Eu(t,s))))return;this.C(t,e,s)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(t,e,{useDefault:s,reflect:i,wrapped:r},o){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,o??e??this[t]),!0!==r||void 0!==o)||(this._$AL.has(t)||(this.hasUpdated||s||(e=void 0),this._$AL.set(t,e)),!0===i&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,e]of this._$Ep)this[t]=e;this._$Ep=void 0}const t=this.constructor.elementProperties;if(t.size>0)for(const[e,s]of t){const{wrapped:t}=s,i=this[e];!0!==t||this._$AL.has(e)||void 0===i||this.C(e,void 0,s,i)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(e)):this._$EM()}catch(e){throw t=!1,this._$EM(),e}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(t){}firstUpdated(t){}};b.elementStyles=[],b.shadowRootOptions={mode:"open"},b[m("elementProperties")]=new Map,b[m("finalized")]=new Map,g?.({ReactiveElement:b}),(u.reactiveElementVersions??=[]).push("2.1.2");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const A=globalThis,x=t=>t,w=A.trustedTypes,E=w?w.createPolicy("lit-html",{createHTML:t=>t}):void 0,S="$lit$",C=`lit$${Math.random().toFixed(9).slice(2)}$`,P="?"+C,T=`<${P}>`,M=document,H=()=>M.createComment(""),O=t=>null===t||"object"!=typeof t&&"function"!=typeof t,U=Array.isArray,k="[ \t\n\f\r]",R=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,N=/-->/g,j=/>/g,z=RegExp(`>|${k}(?:([^\\s"'>=/]+)(${k}*=${k}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),D=/'/g,I=/"/g,B=/^(?:script|style|textarea|title)$/i,L=(t=>(e,...s)=>({_$litType$:t,strings:e,values:s}))(1),q=Symbol.for("lit-noChange"),W=Symbol.for("lit-nothing"),F=new WeakMap,V=M.createTreeWalker(M,129);function K(t,e){if(!U(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==E?E.createHTML(e):e}const J=(t,e)=>{const s=t.length-1,i=[];let r,o=2===e?"<svg>":3===e?"<math>":"",n=R;for(let e=0;e<s;e++){const s=t[e];let a,l,h=-1,c=0;for(;c<s.length&&(n.lastIndex=c,l=n.exec(s),null!==l);)c=n.lastIndex,n===R?"!--"===l[1]?n=N:void 0!==l[1]?n=j:void 0!==l[2]?(B.test(l[2])&&(r=RegExp("</"+l[2],"g")),n=z):void 0!==l[3]&&(n=z):n===z?">"===l[0]?(n=r??R,h=-1):void 0===l[1]?h=-2:(h=n.lastIndex-l[2].length,a=l[1],n=void 0===l[3]?z:'"'===l[3]?I:D):n===I||n===D?n=z:n===N||n===j?n=R:(n=z,r=void 0);const d=n===z&&t[e+1].startsWith("/>")?" ":"";o+=n===R?s+T:h>=0?(i.push(a),s.slice(0,h)+S+s.slice(h)+C+d):s+C+(-2===h?e:d)}return[K(t,o+(t[s]||"<?>")+(2===e?"</svg>":3===e?"</math>":"")),i]};class Z{constructor({strings:t,_$litType$:e},s){let i;this.parts=[];let r=0,o=0;const n=t.length-1,a=this.parts,[l,h]=J(t,e);if(this.el=Z.createElement(l,s),V.currentNode=this.el.content,2===e||3===e){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes)}for(;null!==(i=V.nextNode())&&a.length<n;){if(1===i.nodeType){if(i.hasAttributes())for(const t of i.getAttributeNames())if(t.endsWith(S)){const e=h[o++],s=i.getAttribute(t).split(C),n=/([.?@])?(.*)/.exec(e);a.push({type:1,index:r,name:n[2],strings:s,ctor:"."===n[1]?tt:"?"===n[1]?et:"@"===n[1]?st:Y}),i.removeAttribute(t)}else t.startsWith(C)&&(a.push({type:6,index:r}),i.removeAttribute(t));if(B.test(i.tagName)){const t=i.textContent.split(C),e=t.length-1;if(e>0){i.textContent=w?w.emptyScript:"";for(let s=0;s<e;s++)i.append(t[s],H()),V.nextNode(),a.push({type:2,index:++r});i.append(t[e],H())}}}else if(8===i.nodeType)if(i.data===P)a.push({type:2,index:r});else{let t=-1;for(;-1!==(t=i.data.indexOf(C,t+1));)a.push({type:7,index:r}),t+=C.length-1}r++}}static createElement(t,e){const s=M.createElement("template");return s.innerHTML=t,s}}function G(t,e,s=t,i){if(e===q)return e;let r=void 0!==i?s._$Co?.[i]:s._$Cl;const o=O(e)?void 0:e._$litDirective$;return r?.constructor!==o&&(r?._$AO?.(!1),void 0===o?r=void 0:(r=new o(t),r._$AT(t,s,i)),void 0!==i?(s._$Co??=[])[i]=r:s._$Cl=r),void 0!==r&&(e=G(t,r._$AS(t,e.values),r,i)),e}class Q{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:s}=this._$AD,i=(t?.creationScope??M).importNode(e,!0);V.currentNode=i;let r=V.nextNode(),o=0,n=0,a=s[0];for(;void 0!==a;){if(o===a.index){let e;2===a.type?e=new X(r,r.nextSibling,this,t):1===a.type?e=new a.ctor(r,a.name,a.strings,this,t):6===a.type&&(e=new it(r,this,t)),this._$AV.push(e),a=s[++n]}o!==a?.index&&(r=V.nextNode(),o++)}return V.currentNode=M,i}p(t){let e=0;for(const s of this._$AV)void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,e),e+=s.strings.length-2):s._$AI(t[e])),e++}}class X{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,s,i){this.type=2,this._$AH=W,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=s,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t?.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=G(this,t,e),O(t)?t===W||null==t||""===t?(this._$AH!==W&&this._$AR(),this._$AH=W):t!==this._$AH&&t!==q&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>U(t)||"function"==typeof t?.[Symbol.iterator])(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==W&&O(this._$AH)?this._$AA.nextSibling.data=t:this.T(M.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:s}=t,i="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=Z.createElement(K(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===i)this._$AH.p(e);else{const t=new Q(i,this),s=t.u(this.options);t.p(e),this.T(s),this._$AH=t}}_$AC(t){let e=F.get(t.strings);return void 0===e&&F.set(t.strings,e=new Z(t)),e}k(t){U(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let s,i=0;for(const r of t)i===e.length?e.push(s=new X(this.O(H()),this.O(H()),this,this.options)):s=e[i],s._$AI(r),i++;i<e.length&&(this._$AR(s&&s._$AB.nextSibling,i),e.length=i)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const e=x(t).nextSibling;x(t).remove(),t=e}}setConnected(t){void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t))}}class Y{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,s,i,r){this.type=1,this._$AH=W,this._$AN=void 0,this.element=t,this.name=e,this._$AM=i,this.options=r,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=W}_$AI(t,e=this,s,i){const r=this.strings;let o=!1;if(void 0===r)t=G(this,t,e,0),o=!O(t)||t!==this._$AH&&t!==q,o&&(this._$AH=t);else{const i=t;let n,a;for(t=r[0],n=0;n<r.length-1;n++)a=G(this,i[s+n],e,n),a===q&&(a=this._$AH[n]),o||=!O(a)||a!==this._$AH[n],a===W?t=W:t!==W&&(t+=(a??"")+r[n+1]),this._$AH[n]=a}o&&!i&&this.j(t)}j(t){t===W?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class tt extends Y{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===W?void 0:t}}class et extends Y{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==W)}}class st extends Y{constructor(t,e,s,i,r){super(t,e,s,i,r),this.type=5}_$AI(t,e=this){if((t=G(this,t,e,0)??W)===q)return;const s=this._$AH,i=t===W&&s!==W||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,r=t!==W&&(s===W||i);i&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class it{constructor(t,e,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){G(this,t)}}const rt=A.litHtmlPolyfillSupport;rt?.(Z,X),(A.litHtmlVersions??=[]).push("3.3.2");const ot=globalThis;
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */class nt extends b{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,s)=>{const i=s?.renderBefore??e;let r=i._$litPart$;if(void 0===r){const t=s?.renderBefore??null;i._$litPart$=r=new X(e.insertBefore(H(),t),t,void 0,s??{})}return r._$AI(t),r})(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return q}}nt._$litElement$=!0,nt.finalized=!0,ot.litElementHydrateSupport?.({LitElement:nt});const at=ot.litElementPolyfillSupport;at?.({LitElement:nt}),(ot.litElementVersions??=[]).push("4.2.2");
+ */Symbol.metadata??=Symbol("metadata"),_.litPropertyMetadata??=new WeakMap;let A=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=y){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const i=Symbol(),s=this.getPropertyDescriptor(t,i,e);void 0!==s&&h(this.prototype,t,s)}}static getPropertyDescriptor(t,e,i){const{get:s,set:r}=c(this.prototype,t)??{get(){return this[e]},set(t){this[e]=t}};return{get:s,set(e){const o=s?.call(this);r?.call(this,e),this.requestUpdate(t,o,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??y}static _$Ei(){if(this.hasOwnProperty(b("elementProperties")))return;const t=u(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(b("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(b("properties"))){const t=this.properties,e=[...d(t),...p(t)];for(const i of e)this.createProperty(i,t[i])}const t=this[Symbol.metadata];if(null!==t){const e=litPropertyMetadata.get(t);if(void 0!==e)for(const[t,i]of e)this.elementProperties.set(t,i)}this._$Eh=new Map;for(const[t,e]of this.elementProperties){const i=this._$Eu(t,e);void 0!==i&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const i=new Set(t.flat(1/0).reverse());for(const t of i)e.unshift(a(t))}else void 0!==t&&e.push(a(t));return e}static _$Eu(t,e){const i=e.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const i of e.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((t,s)=>{if(i)t.adoptedStyleSheets=s.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const i of s){const s=document.createElement("style"),r=e.litNonce;void 0!==r&&s.setAttribute("nonce",r),s.textContent=i.cssText,t.appendChild(s)}})(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,i){this._$AK(t,i)}_$ET(t,e){const i=this.constructor.elementProperties.get(t),s=this.constructor._$Eu(t,i);if(void 0!==s&&!0===i.reflect){const r=(void 0!==i.converter?.toAttribute?i.converter:v).toAttribute(e,i.type);this._$Em=t,null==r?this.removeAttribute(s):this.setAttribute(s,r),this._$Em=null}}_$AK(t,e){const i=this.constructor,s=i._$Eh.get(t);if(void 0!==s&&this._$Em!==s){const t=i.getPropertyOptions(s),r="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:v;this._$Em=s;const o=r.fromAttribute(e,t.type);this[s]=o??this._$Ej?.get(s)??o,this._$Em=null}}requestUpdate(t,e,i,s=!1,r){if(void 0!==t){const o=this.constructor;if(!1===s&&(r=this[t]),i??=o.getPropertyOptions(t),!((i.hasChanged??$)(r,e)||i.useDefault&&i.reflect&&r===this._$Ej?.get(t)&&!this.hasAttribute(o._$Eu(t,i))))return;this.C(t,e,i)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(t,e,{useDefault:i,reflect:s,wrapped:r},o){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,o??e??this[t]),!0!==r||void 0!==o)||(this._$AL.has(t)||(this.hasUpdated||i||(e=void 0),this._$AL.set(t,e)),!0===s&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,e]of this._$Ep)this[t]=e;this._$Ep=void 0}const t=this.constructor.elementProperties;if(t.size>0)for(const[e,i]of t){const{wrapped:t}=i,s=this[e];!0!==t||this._$AL.has(e)||void 0===s||this.C(e,void 0,i,s)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(e)):this._$EM()}catch(e){throw t=!1,this._$EM(),e}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(t){}firstUpdated(t){}};A.elementStyles=[],A.shadowRootOptions={mode:"open"},A[b("elementProperties")]=new Map,A[b("finalized")]=new Map,m?.({ReactiveElement:A}),(_.reactiveElementVersions??=[]).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const lt={attribute:!0,type:String,converter:$,reflect:!1,hasChanged:y},ht=(t=lt,e,s)=>{const{kind:i,metadata:r}=s;let o=globalThis.litPropertyMetadata.get(r);if(void 0===o&&globalThis.litPropertyMetadata.set(r,o=new Map),"setter"===i&&((t=Object.create(t)).wrapped=!0),o.set(s.name,t),"accessor"===i){const{name:i}=s;return{set(s){const r=e.get.call(this);e.set.call(this,s),this.requestUpdate(i,r,t,!0,s)},init(e){return void 0!==e&&this.C(i,void 0,t,e),e}}}if("setter"===i){const{name:i}=s;return function(s){const r=this[i];e.call(this,s),this.requestUpdate(i,r,t,!0,s)}}throw Error("Unsupported decorator location: "+i)};
+const w=globalThis,x=t=>t,E=w.trustedTypes,S=E?E.createPolicy("lit-html",{createHTML:t=>t}):void 0,k="$lit$",C=`lit$${Math.random().toFixed(9).slice(2)}$`,P="?"+C,T=`<${P}>`,M=document,O=()=>M.createComment(""),H=t=>null===t||"object"!=typeof t&&"function"!=typeof t,R=Array.isArray,U="[ \t\n\f\r]",D=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,N=/-->/g,j=/>/g,z=RegExp(`>|${U}(?:([^\\s"'>=/]+)(${U}*=${U}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),L=/'/g,I=/"/g,B=/^(?:script|style|textarea|title)$/i,F=(t=>(e,...i)=>({_$litType$:t,strings:e,values:i}))(1),q=Symbol.for("lit-noChange"),W=Symbol.for("lit-nothing"),X=new WeakMap,Y=M.createTreeWalker(M,129);function V(t,e){if(!R(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==S?S.createHTML(e):e}const K=(t,e)=>{const i=t.length-1,s=[];let r,o=2===e?"<svg>":3===e?"<math>":"",n=D;for(let e=0;e<i;e++){const i=t[e];let a,l,h=-1,c=0;for(;c<i.length&&(n.lastIndex=c,l=n.exec(i),null!==l);)c=n.lastIndex,n===D?"!--"===l[1]?n=N:void 0!==l[1]?n=j:void 0!==l[2]?(B.test(l[2])&&(r=RegExp("</"+l[2],"g")),n=z):void 0!==l[3]&&(n=z):n===z?">"===l[0]?(n=r??D,h=-1):void 0===l[1]?h=-2:(h=n.lastIndex-l[2].length,a=l[1],n=void 0===l[3]?z:'"'===l[3]?I:L):n===I||n===L?n=z:n===N||n===j?n=D:(n=z,r=void 0);const d=n===z&&t[e+1].startsWith("/>")?" ":"";o+=n===D?i+T:h>=0?(s.push(a),i.slice(0,h)+k+i.slice(h)+C+d):i+C+(-2===h?e:d)}return[V(t,o+(t[i]||"<?>")+(2===e?"</svg>":3===e?"</math>":"")),s]};class J{constructor({strings:t,_$litType$:e},i){let s;this.parts=[];let r=0,o=0;const n=t.length-1,a=this.parts,[l,h]=K(t,e);if(this.el=J.createElement(l,i),Y.currentNode=this.el.content,2===e||3===e){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes)}for(;null!==(s=Y.nextNode())&&a.length<n;){if(1===s.nodeType){if(s.hasAttributes())for(const t of s.getAttributeNames())if(t.endsWith(k)){const e=h[o++],i=s.getAttribute(t).split(C),n=/([.?@])?(.*)/.exec(e);a.push({type:1,index:r,name:n[2],strings:i,ctor:"."===n[1]?et:"?"===n[1]?it:"@"===n[1]?st:tt}),s.removeAttribute(t)}else t.startsWith(C)&&(a.push({type:6,index:r}),s.removeAttribute(t));if(B.test(s.tagName)){const t=s.textContent.split(C),e=t.length-1;if(e>0){s.textContent=E?E.emptyScript:"";for(let i=0;i<e;i++)s.append(t[i],O()),Y.nextNode(),a.push({type:2,index:++r});s.append(t[e],O())}}}else if(8===s.nodeType)if(s.data===P)a.push({type:2,index:r});else{let t=-1;for(;-1!==(t=s.data.indexOf(C,t+1));)a.push({type:7,index:r}),t+=C.length-1}r++}}static createElement(t,e){const i=M.createElement("template");return i.innerHTML=t,i}}function Z(t,e,i=t,s){if(e===q)return e;let r=void 0!==s?i._$Co?.[s]:i._$Cl;const o=H(e)?void 0:e._$litDirective$;return r?.constructor!==o&&(r?._$AO?.(!1),void 0===o?r=void 0:(r=new o(t),r._$AT(t,i,s)),void 0!==s?(i._$Co??=[])[s]=r:i._$Cl=r),void 0!==r&&(e=Z(t,r._$AS(t,e.values),r,s)),e}class G{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:i}=this._$AD,s=(t?.creationScope??M).importNode(e,!0);Y.currentNode=s;let r=Y.nextNode(),o=0,n=0,a=i[0];for(;void 0!==a;){if(o===a.index){let e;2===a.type?e=new Q(r,r.nextSibling,this,t):1===a.type?e=new a.ctor(r,a.name,a.strings,this,t):6===a.type&&(e=new rt(r,this,t)),this._$AV.push(e),a=i[++n]}o!==a?.index&&(r=Y.nextNode(),o++)}return Y.currentNode=M,s}p(t){let e=0;for(const i of this._$AV)void 0!==i&&(void 0!==i.strings?(i._$AI(t,i,e),e+=i.strings.length-2):i._$AI(t[e])),e++}}class Q{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,i,s){this.type=2,this._$AH=W,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=i,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t?.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=Z(this,t,e),H(t)?t===W||null==t||""===t?(this._$AH!==W&&this._$AR(),this._$AH=W):t!==this._$AH&&t!==q&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>R(t)||"function"==typeof t?.[Symbol.iterator])(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==W&&H(this._$AH)?this._$AA.nextSibling.data=t:this.T(M.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:i}=t,s="number"==typeof i?this._$AC(t):(void 0===i.el&&(i.el=J.createElement(V(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===s)this._$AH.p(e);else{const t=new G(s,this),i=t.u(this.options);t.p(e),this.T(i),this._$AH=t}}_$AC(t){let e=X.get(t.strings);return void 0===e&&X.set(t.strings,e=new J(t)),e}k(t){R(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let i,s=0;for(const r of t)s===e.length?e.push(i=new Q(this.O(O()),this.O(O()),this,this.options)):i=e[s],i._$AI(r),s++;s<e.length&&(this._$AR(i&&i._$AB.nextSibling,s),e.length=s)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const e=x(t).nextSibling;x(t).remove(),t=e}}setConnected(t){void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t))}}class tt{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,i,s,r){this.type=1,this._$AH=W,this._$AN=void 0,this.element=t,this.name=e,this._$AM=s,this.options=r,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=W}_$AI(t,e=this,i,s){const r=this.strings;let o=!1;if(void 0===r)t=Z(this,t,e,0),o=!H(t)||t!==this._$AH&&t!==q,o&&(this._$AH=t);else{const s=t;let n,a;for(t=r[0],n=0;n<r.length-1;n++)a=Z(this,s[i+n],e,n),a===q&&(a=this._$AH[n]),o||=!H(a)||a!==this._$AH[n],a===W?t=W:t!==W&&(t+=(a??"")+r[n+1]),this._$AH[n]=a}o&&!s&&this.j(t)}j(t){t===W?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class et extends tt{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===W?void 0:t}}class it extends tt{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==W)}}class st extends tt{constructor(t,e,i,s,r){super(t,e,i,s,r),this.type=5}_$AI(t,e=this){if((t=Z(this,t,e,0)??W)===q)return;const i=this._$AH,s=t===W&&i!==W||t.capture!==i.capture||t.once!==i.once||t.passive!==i.passive,r=t!==W&&(i===W||s);s&&this.element.removeEventListener(this.name,this,i),r&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class rt{constructor(t,e,i){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(t){Z(this,t)}}const ot=w.litHtmlPolyfillSupport;ot?.(J,Q),(w.litHtmlVersions??=[]).push("3.3.2");const nt=globalThis;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function ct(t){return(e,s)=>"object"==typeof s?ht(t,e,s):((t,e,s)=>{const i=e.hasOwnProperty(s);return e.constructor.createProperty(s,t),i?Object.getOwnPropertyDescriptor(e,s):void 0})(t,e,s)}
+ */class at extends A{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,i)=>{const s=i?.renderBefore??e;let r=s._$litPart$;if(void 0===r){const t=i?.renderBefore??null;s._$litPart$=r=new Q(e.insertBefore(O(),t),t,void 0,i??{})}return r._$AI(t),r})(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return q}}at._$litElement$=!0,at.finalized=!0,nt.litElementHydrateSupport?.({LitElement:at});const lt=nt.litElementPolyfillSupport;lt?.({LitElement:at}),(nt.litElementVersions??=[]).push("4.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function dt(t){return ct({...t,state:!0,attribute:!1})}let pt=class extends nt{constructor(){super(...arguments),this._brightnessPct=null,this._colorTemp=null,this._colorHex=null}setConfig(t){if(!t||!t.entity)throw new Error("Entity must be specified");this._config=t}set hassState(t){this.hass=t,this._updateFromEntity()}set hass(t){this._hassInternal=t,this._updateFromEntity()}get hass(){return this._hassInternal}get _entity(){if(this.hass&&this._config)return this.hass.states[this._config.entity]}_updateFromEntity(){const t=this._entity;if(!t)return;const e=t.attributes;if(null!=e.brightness){const t=Math.round(e.brightness/255*100);this._brightnessPct=t}else this._brightnessPct=null;"number"==typeof e.color_temp_kelvin?this._colorTemp=e.color_temp_kelvin:"number"==typeof e.color_temp?this._colorTemp=Math.round(1e6/e.color_temp):this._colorTemp=null;const s=this._getRgbFromAttributes(e);this._colorHex=s?this._rgbToHex(s):"#ffffff"}_getRgbFromAttributes(t){if(Array.isArray(t.rgb_color)&&t.rgb_color.length>=3){const[e,s,i]=t.rgb_color;return{r:e,g:s,b:i}}if(Array.isArray(t.hs_color)&&t.hs_color.length>=2){const[e,s]=t.hs_color;return this._hsToRgb(e,s)}return null}_hsToRgb(t,e){const s=1*(e/100),i=t/60,r=s*(1-Math.abs(i%2-1));let o=0,n=0,a=0;i>=0&&i<1?(o=s,n=r):i>=1&&i<2?(o=r,n=s):i>=2&&i<3?(n=s,a=r):i>=3&&i<4?(n=r,a=s):i>=4&&i<5?(o=r,a=s):i>=5&&i<6&&(o=s,a=r);const l=1-s;return{r:Math.round(255*(o+l)),g:Math.round(255*(n+l)),b:Math.round(255*(a+l))}}_rgbToHex({r:t,g:e,b:s}){const i=t=>t.toString(16).padStart(2,"0");return`#${i(t)}${i(e)}${i(s)}`}_kelvinToRgb(t){const e=Math.max(1e3,Math.min(4e4,t))/100;let s,i,r;e<=66?(s=255,i=99.4708025861*Math.log(e)-161.1195681661,r=e<=19?0:138.5177312231*Math.log(e-10)-305.0447927307):(s=329.698727446*Math.pow(e-60,-.1332047592),i=288.1221695283*Math.pow(e-60,-.0755148492),r=255);const o=t=>Math.max(0,Math.min(255,Math.round(t)));return{r:o(s),g:o(i),b:o(r)}}_kelvinToHex(t){return this._rgbToHex(this._kelvinToRgb(t))}_hexToRgb(t){const e=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(t);return e?{r:parseInt(e[1],16),g:parseInt(e[2],16),b:parseInt(e[3],16)}:null}_onBrightnessChange(t){const e=t.detail&&t.detail.value,s=t.target,i="number"==typeof e?e:s?Number(s.value):0;this._brightnessPct=i,this._callService({brightness_pct:i,transition:.2})}_onColorTempChange(t){const e=t.detail&&t.detail.value,s=t.target,i="number"==typeof e?e:s?Number(s.value):0;this._colorTemp=i,this._callService({color_temp_kelvin:i,transition:.2})}_onColorChange(t){const e=t.target.value;this._colorHex=e;const s=this._hexToRgb(e);s&&this._callService({rgb_color:[s.r,s.g,s.b],transition:.2})}_togglePower(){this._entity&&this.hass.callService("light","toggle",{entity_id:this._entity.entity_id})}_callService(t){this._entity&&this.hass.callService("light","turn_on",{entity_id:this._entity.entity_id,...t})}_supportsColorTemp(t){const e=t.attributes;if("number"==typeof e.color_temp_kelvin||"number"==typeof e.color_temp)return!0;const s=e.supported_color_modes;return Array.isArray(s)&&s.includes("color_temp")}_supportsColor(t){const e=t.attributes;if(e.rgb_color||e.hs_color)return!0;const s=e.supported_color_modes;return!!Array.isArray(s)&&s.some(t=>["hs","rgb","rgbw","rgbww","xy"].includes(t))}render(){const t=this._entity;if(!this._config)return L`<div class="wrapper">Missing config</div>`;if(!t)return L`<div class="wrapper">
+ */
+const ht={attribute:!0,type:String,converter:v,reflect:!1,hasChanged:$},ct=(t=ht,e,i)=>{const{kind:s,metadata:r}=i;let o=globalThis.litPropertyMetadata.get(r);if(void 0===o&&globalThis.litPropertyMetadata.set(r,o=new Map),"setter"===s&&((t=Object.create(t)).wrapped=!0),o.set(i.name,t),"accessor"===s){const{name:s}=i;return{set(i){const r=e.get.call(this);e.set.call(this,i),this.requestUpdate(s,r,t,!0,i)},init(e){return void 0!==e&&this.C(s,void 0,t,e),e}}}if("setter"===s){const{name:s}=i;return function(i){const r=this[s];e.call(this,i),this.requestUpdate(s,r,t,!0,i)}}throw Error("Unsupported decorator location: "+s)};
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function dt(t){return(e,i)=>"object"==typeof i?ct(t,e,i):((t,e,i)=>{const s=e.hasOwnProperty(i);return e.constructor.createProperty(i,t),s?Object.getOwnPropertyDescriptor(e,i):void 0})(t,e,i)}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function pt(t){return dt({...t,state:!0,attribute:!1})}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */let ut=class extends at{constructor(){super(),this._brightnessPct=null,this._colorTemp=null,this._currentHue=0,this._markerX=0,this._markerY=0,this._colorDebounceTimer=null,this._draggingColor=!1,this._boundOnDrag=this._onDragColor.bind(this),this._boundOnDragEnd=this._onDragEnd.bind(this)}setConfig(t){if(!t||!t.entity)throw new Error("Entity must be specified");this._config=t}set hass(t){this._hassInternal=t,this._updateFromEntity()}get hass(){return this._hassInternal}get _entity(){if(this.hass&&this._config)return this.hass.states[this._config.entity]}_updateFromEntity(){const t=this._entity;if(!t)return;const e=t.attributes;if(null!=e.brightness?this._brightnessPct=Math.round(e.brightness/255*100):this._brightnessPct=null,"number"==typeof e.color_temp_kelvin?this._colorTemp=e.color_temp_kelvin:"number"==typeof e.color_temp?this._colorTemp=Math.round(1e6/e.color_temp):this._colorTemp=null,!this._draggingColor){const t=this._getRgbFromAttributes(e);t&&this._setPickerFromRgb(t.r,t.g,t.b)}}_getRgbFromAttributes(t){if(Array.isArray(t.rgb_color)&&t.rgb_color.length>=3){const[e,i,s]=t.rgb_color;return{r:e,g:i,b:s}}if(Array.isArray(t.hs_color)&&t.hs_color.length>=2){const[e,i]=t.hs_color;return this._hsToRgb(e,i)}return null}_hsToRgb(t,e){const i=1*(e/100),s=t/60,r=i*(1-Math.abs(s%2-1));let o=0,n=0,a=0;s>=0&&s<1?(o=i,n=r):s>=1&&s<2?(o=r,n=i):s>=2&&s<3?(n=i,a=r):s>=3&&s<4?(n=r,a=i):s>=4&&s<5?(o=r,a=i):s>=5&&s<6&&(o=i,a=r);const l=1-i;return{r:Math.round(255*(o+l)),g:Math.round(255*(n+l)),b:Math.round(255*(a+l))}}_rgbToHex({r:t,g:e,b:i}){const s=t=>t.toString(16).padStart(2,"0");return`#${s(t)}${s(e)}${s(i)}`}_hexToRgb(t){const e=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(t);return e?{r:parseInt(e[1],16),g:parseInt(e[2],16),b:parseInt(e[3],16)}:null}_rgbToHsv(t,e,i){t/=255,e/=255,i/=255;const s=Math.max(t,e,i),r=Math.min(t,e,i),o=s-r;let n=0;const a=0===s?0:o/s,l=s;if(s!==r){switch(s){case t:n=(e-i)/o+(e<i?6:0);break;case e:n=(i-t)/o+2;break;case i:n=(t-e)/o+4}n/=6}return{h:360*n,s:100*a,v:100*l}}_setPickerFromRgb(t,e,i){const s=this._rgbToHsv(t,e,i);this._currentHue=s.h,this._markerX=s.s,this._markerY=100-s.v}_kelvinToRgb(t){const e=Math.max(1e3,Math.min(4e4,t))/100;let i,s,r;e<=66?(i=255,s=99.4708025861*Math.log(e)-161.1195681661,r=e<=19?0:138.5177312231*Math.log(e-10)-305.0447927307):(i=329.698727446*Math.pow(e-60,-.1332047592),s=288.1221695283*Math.pow(e-60,-.0755148492),r=255);const o=t=>Math.max(0,Math.min(255,Math.round(t)));return{r:o(i),g:o(s),b:o(r)}}_kelvinToHex(t){return this._rgbToHex(this._kelvinToRgb(t))}_callService(t){this._entity&&this.hass.callService("light","turn_on",{entity_id:this._entity.entity_id,...t})}_debouncedColorServiceCall(t,e,i){this._colorDebounceTimer&&window.clearTimeout(this._colorDebounceTimer),this._colorDebounceTimer=window.setTimeout(()=>{this._callService({rgb_color:[t,e,i],transition:.2})},150)}_onBrightnessChange(t){const e=t.detail&&"number"==typeof t.detail.value?t.detail.value:Number(t.target.value);this._brightnessPct=e,this._callService({brightness_pct:e,transition:.2})}_onColorTempChange(t){const e=t.detail&&"number"==typeof t.detail.value?t.detail.value:Number(t.target.value);this._colorTemp=e,this._callService({color_temp_kelvin:e,transition:.2})}_hsvToRgb(t,e,i){let s=0,r=0,o=0;const n=Math.floor(6*t),a=6*t-n,l=i*(1-e),h=i*(1-a*e),c=i*(1-(1-a)*e);switch(n%6){case 0:s=i,r=c,o=l;break;case 1:s=h,r=i,o=l;break;case 2:s=l,r=i,o=c;break;case 3:s=l,r=h,o=i;break;case 4:s=c,r=l,o=i;break;case 5:s=i,r=l,o=h}return{r:Math.round(255*s),g:Math.round(255*r),b:Math.round(255*o)}}_updateColorFromPicker(){const t=this._markerX/100,e=(100-this._markerY)/100,{r:i,g:s,b:r}=this._hsvToRgb(this._currentHue/360,t,e);this._debouncedColorServiceCall(i,s,r)}_startDragColor(t){this._draggingColor=!0,document.addEventListener("mousemove",this._boundOnDrag),document.addEventListener("touchmove",this._boundOnDrag,{passive:!1}),document.addEventListener("mouseup",this._boundOnDragEnd),document.addEventListener("touchend",this._boundOnDragEnd),this._onDragColor(t)}_onDragColor(t){if(!this._gradientArea)return;t.cancelable&&t.preventDefault();const e=this._gradientArea.getBoundingClientRect();let i,s;"touches"in t?(i=t.touches[0].clientX,s=t.touches[0].clientY):(i=t.clientX,s=t.clientY);let r=Math.max(0,Math.min(1,(i-e.left)/e.width)),o=Math.max(0,Math.min(1,(s-e.top)/e.height));this._markerX=100*r,this._markerY=100*o,this._updateColorFromPicker()}_onDragEnd(){this._draggingColor=!1,document.removeEventListener("mousemove",this._boundOnDrag),document.removeEventListener("touchmove",this._boundOnDrag),document.removeEventListener("mouseup",this._boundOnDragEnd),document.removeEventListener("touchend",this._boundOnDragEnd)}_onHueInput(t){const e=Number(t.target.value);this._currentHue=e,this._updateColorFromPicker()}_pickSwatch(t){const e=this._hexToRgb(t);e&&(this._setPickerFromRgb(e.r,e.g,e.b),this._callService({rgb_color:[e.r,e.g,e.b],transition:.2}))}_togglePower(){this._entity&&this.hass.callService("light","toggle",{entity_id:this._entity.entity_id})}render(){const t=this._entity;if(!this._config)return F`<div class="wrapper">Missing config</div>`;if(!t)return F`<div class="wrapper">
         <div class="header">
           <div class="title">${this._config.entity}</div>
         </div>
         <div class="message">Entity not found</div>
-      </div>`;const e=t.attributes,s=e.friendly_name||t.entity_id,i="on"===t.state,r="number"==typeof e.min_color_temp_kelvin?e.min_color_temp_kelvin:"number"==typeof e.max_mireds?Math.round(1e6/e.max_mireds):2700,o="number"==typeof e.max_color_temp_kelvin?e.max_color_temp_kelvin:"number"==typeof e.min_mireds?Math.round(1e6/e.min_mireds):6500,n=this._colorTemp??(r+o)/2,a=this._kelvinToHex(n),l=this._kelvinToHex(r),h=this._kelvinToHex(o),c=!1!==this._config.show_color_temp&&this._supportsColorTemp(t),d=!1!==this._config.show_color&&this._supportsColor(t);return L`<div class="wrapper">
+      </div>`;const e=t.attributes,i=e.friendly_name||t.entity_id,s="on"===t.state,r=e.supported_color_modes,o="number"==typeof e.color_temp_kelvin||"number"==typeof e.color_temp||Array.isArray(r)&&r.includes("color_temp"),n=e.rgb_color||e.hs_color||Array.isArray(r)&&r.some(t=>["hs","rgb","rgbw","rgbww","xy"].includes(t)),a=!1!==this._config.show_color_temp&&o,l=!1!==this._config.show_color&&n,h=e.min_color_temp_kelvin||(e.max_mireds?Math.round(1e6/e.max_mireds):2700),c=e.max_color_temp_kelvin||(e.min_mireds?Math.round(1e6/e.min_mireds):6500),d=this._colorTemp??(h+c)/2,p=this._kelvinToHex(d);return F`<div class="wrapper">
       <div class="header">
-        <div class="title">${s}</div>
-        <div class="subtitle">${i?"On":"Off"}</div>
+        <div class="title">${i}</div>
+        <div class="subtitle">${s?"On":"Off"}</div>
         <button class="power" @click=${this._togglePower}>
-          ${i?"Turn off":"Turn on"}
+          ${s?"Turn off":"Turn on"}
         </button>
       </div>
-      <div class="content">
-        ${c?L`<div class="column">
-              <div class="label">
-                ${this._config.color_temp_label??"Teplota"}
-              </div>
+
+      <div class="sliders-row">
+        ${a?F`<div class="column color-temp-column">
+              <div class="label">${this._config.color_temp_label??"Teplota"}</div>
               <div class="slider-wrapper">
                 <ha-control-slider
-                  .value=${n}
-                  .min=${r}
-                  .max=${o}
+                  .value=${d}
+                  .min=${h}
+                  .max=${c}
                   step="50"
                   mode="start"
                   vertical
                   show-handle
-                  tooltip-position="right"
                   unit="K"
-                  style=${`--control-slider-color: ${a};`}
+                  style=${`--control-slider-color: ${p};`}
                   @value-changed=${this._onColorTempChange}
                 >
-                  <div
-                    slot="background"
-                    class="ct-background"
-                    style=${`background: linear-gradient(to top, ${l}, ${h});`}
-                  ></div>
+                  <div slot="background" class="ct-background" 
+                       style=${`background: linear-gradient(to top, ${this._kelvinToHex(h)}, ${this._kelvinToHex(c)});`}>
+                  </div>
                 </ha-control-slider>
               </div>
-              <div class="value">
-                ${null!=this._colorTemp?`${this._colorTemp} K`:W}
-              </div>
+              <div class="value">${null!=this._colorTemp?`${this._colorTemp} K`:W}</div>
             </div>`:W}
 
         <div class="column brightness-column">
-          <div class="label">
-            ${this._config.brightness_label??"Jas"}
-          </div>
+          <div class="label">${this._config.brightness_label??"Jas"}</div>
           <div class="slider-wrapper">
             <ha-control-slider
-              .value=${this._brightnessPct??(i?100:0)}
-              min="1"
-              max="100"
-              step="1"
-              mode="start"
-              vertical
-              show-handle
-              tooltip-position="left"
-              unit="%"
+              .value=${this._brightnessPct??(s?100:0)}
+              min="1" max="100" step="1"
+              mode="start" vertical show-handle unit="%"
               @value-changed=${this._onBrightnessChange}
             ></ha-control-slider>
           </div>
-          <div class="value">
-            ${null!=this._brightnessPct?`${this._brightnessPct}%`:W}
-          </div>
+          <div class="value">${null!=this._brightnessPct?`${this._brightnessPct}%`:W}</div>
         </div>
-
-        ${d?L`<div class="column">
-              <div class="label">
-                ${this._config.color_label??"Barva"}
-              </div>
-              <div class="color-wrapper">
-                <input
-                  class="color-input"
-                  type="color"
-                  .value=${this._colorHex??"#ffffff"}
-                  @change=${this._onColorChange}
-                />
-              </div>
-            </div>`:W}
       </div>
-    </div>`}};pt.styles=((t,...e)=>{const s=1===t.length?t[0]:e.reduce((e,s,i)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[i+1],t[0]);return new o(s,t,i)})`
-    :host {
-      display: block;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      color: var(--primary-text-color, #ffffff);
-    }
 
-    .wrapper {
-      background: var(--dialog-background-color, #202124);
-      color: var(--primary-text-color, #ffffff);
-      border-radius: 16px;
-      padding: 16px;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+      ${l?F`<div class="color-section">
+            <div class="label">${this._config.color_label??"Barva"}</div>
+            
+            <div class="native-coloris-picker">
+              <div class="color-gradient" 
+                   style=${`background-color: hsl(${this._currentHue}, 100%, 50%)`}
+                   @mousedown=${this._startDragColor}
+                   @touchstart=${this._startDragColor}>
+                <div class="gradient-white"></div>
+                <div class="gradient-black"></div>
+                <div class="color-marker" style=${`left: ${this._markerX}%; top: ${this._markerY}%`}></div>
+              </div>
+              
+              <div class="hue-slider-wrap">
+                 <input type="range" class="hue-slider" min="0" max="360" 
+                        .value=${this._currentHue} 
+                        @input=${this._onHueInput} />
+              </div>
+            
+              <div class="swatches">
+                 ${["#ff0000","#ff8000","#ffff00","#80ff00","#00ff00","#00ff80","#00ffff","#0080ff","#0000ff","#8000ff","#ff00ff","#ff0080","#ffffff"].map(t=>F`<button style="background: ${t}" @click=${()=>this._pickSwatch(t)}></button>`)}
+              </div>
+            </div>
 
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
+          </div>`:W}
+    </div>`}static get styles(){return n`
+      :host {
+        display: block;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--primary-text-color, #ffffff);
+      }
 
-    .title {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
+      .wrapper {
+        background: var(--dialog-background-color, #202124);
+        color: var(--primary-text-color, #ffffff);
+        border-radius: 16px;
+        padding: 16px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
 
-    .subtitle {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        gap: 12px;
+      }
 
-    .power {
-      border: none;
-      border-radius: 999px;
-      padding: 6px 14px;
-      background: var(--accent-color, #03a9f4);
-      color: #ffffff;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
+      .title { font-size: 1.1rem; font-weight: 600; }
+      .subtitle { font-size: 0.9rem; opacity: 0.8; }
 
-    .power:hover {
-      filter: brightness(1.1);
-    }
+      .power {
+        border: none;
+        border-radius: 999px;
+        padding: 6px 14px;
+        background: var(--accent-color, #03a9f4);
+        color: #ffffff;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
 
-    .content {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      align-items: center;
-      justify-items: center;
-    }
+      .power:hover { filter: brightness(1.1); }
 
-    .column {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
+      .sliders-row {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        justify-items: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 24px;
+        padding: 0 16px; /* give some outer margin */
+        box-sizing: border-box;
+      }
 
-    .label {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
+      .color-temp-column {
+        grid-column: 1 / 2;
+        justify-self: start;
+      }
 
-    .value {
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
+      .brightness-column {
+        grid-column: 2 / 3;
+      }
 
-    .slider-wrapper {
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .brightness-column ha-control-slider {
+        --control-slider-thickness: 80px;
+        --control-slider-border-radius: 24px;
+      }
 
-    .ct-background {
-      border-radius: var(--control-slider-border-radius);
-      opacity: 0.35;
-    }
-
-    .color-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 180px;
-    }
-
-    .color-input {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: none;
-      padding: 0;
-      background: none;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-    }
-
-    .message {
-      margin-top: 16px;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    @media (max-width: 600px) {
-      .content {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+      .column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         gap: 8px;
       }
 
+      .label { font-size: 0.9rem; opacity: 0.9; }
+      .value { font-size: 0.8rem; opacity: 0.7; }
+
       .slider-wrapper {
-        height: 150px;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-    }
-  `,t([ct({attribute:!1})],pt.prototype,"hass",void 0),t([dt()],pt.prototype,"_config",void 0),t([dt()],pt.prototype,"_brightnessPct",void 0),t([dt()],pt.prototype,"_colorTemp",void 0),t([dt()],pt.prototype,"_colorHex",void 0),pt=t([(t=>(e,s)=>{void 0!==s?s.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)})("light-entity-dialog")],pt),window.customCards=window.customCards||[],window.customCards.push({type:"light-entity-dialog",name:"Light Entity Dialog",description:"Custom dialog/card for Home Assistant lights with brightness, color temperature and color controls in three columns."});export{pt as LightEntityDialog};
+
+      .ct-background {
+        border-radius: var(--control-slider-border-radius);
+        opacity: 0.35;
+      }
+
+      .color-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      /* Native Color Picker imitating Coloris */
+      .native-coloris-picker {
+        width: 100%;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .color-gradient {
+        width: 100%;
+        height: 140px;
+        position: relative;
+        border-radius: 8px 8px 0 0;
+        cursor: crosshair;
+        overflow: hidden;
+        touch-action: none;
+      }
+      
+      .gradient-white {
+        position: absolute; inset: 0; 
+        background: linear-gradient(to right, #fff, rgba(255,255,255,0));
+        pointer-events: none;
+      }
+      
+      .gradient-black {
+        position: absolute; inset: 0; 
+        background: linear-gradient(to top, #000, rgba(0,0,0,0));
+        pointer-events: none;
+      }
+      
+      .color-marker {
+        position: absolute;
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        box-shadow: 0 0 2px rgba(0,0,0,0.5);
+        z-index: 2;
+      }
+
+      .hue-slider-wrap {
+        margin: 14px 10px;
+      }
+      
+      .hue-slider {
+        width: 100%;
+        height: 12px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+        border-radius: 6px;
+        outline: none;
+        margin: 0;
+      }
+      
+      .hue-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px; height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        cursor: grab;
+      }
+      .hue-slider::-moz-range-thumb {
+        width: 18px; height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        cursor: grab;
+      }
+
+      .swatches { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 8px; 
+        margin: 0 6px 12px 6px; 
+      }
+      
+      .swatches button { 
+        width: 22px; 
+        height: 22px; 
+        border-radius: 4px; 
+        border: none; 
+        cursor: pointer; 
+        padding: 0;
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.1); 
+      }
+      
+      .swatches button:hover {
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 600px) {
+        .sliders-row { gap: 16px; }
+        .slider-wrapper { height: 150px; }
+      }
+    `}};t([pt()],ut.prototype,"_config",void 0),t([pt()],ut.prototype,"_brightnessPct",void 0),t([pt()],ut.prototype,"_colorTemp",void 0),t([pt()],ut.prototype,"_currentHue",void 0),t([pt()],ut.prototype,"_markerX",void 0),t([pt()],ut.prototype,"_markerY",void 0),t([
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+function(t){return(e,i,s)=>((t,e,i)=>(i.configurable=!0,i.enumerable=!0,Reflect.decorate&&"object"!=typeof e&&Object.defineProperty(t,e,i),i))(e,i,{get(){return(e=>e.renderRoot?.querySelector(t)??null)(this)}})}(".color-gradient")],ut.prototype,"_gradientArea",void 0),t([dt({attribute:!1})],ut.prototype,"hass",null),ut=t([(t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)})("light-entity-dialog")],ut),window.customCards=window.customCards||[],window.customCards.push({type:"light-entity-dialog",name:"Light Entity Dialog",description:"Custom dialog for HA lights with native inline color picker."});export{ut as LightEntityDialog};
 //# sourceMappingURL=light-entity-dialog.js.map
