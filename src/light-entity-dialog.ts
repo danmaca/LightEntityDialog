@@ -133,6 +133,32 @@ export class LightEntityDialog extends LitElement {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
   }
 
+  private _kelvinToRgb(kelvin: number): RGB {
+    // Approximation formula for 1000K-40000K
+    const temp = Math.max(1000, Math.min(40000, kelvin)) / 100;
+    let r: number;
+    let g: number;
+    let b: number;
+
+    if (temp <= 66) {
+      r = 255;
+      g = 99.4708025861 * Math.log(temp) - 161.1195681661;
+      b =
+        temp <= 19 ? 0 : 138.5177312231 * Math.log(temp - 10) - 305.0447927307;
+    } else {
+      r = 329.698727446 * Math.pow(temp - 60, -0.1332047592);
+      g = 288.1221695283 * Math.pow(temp - 60, -0.0755148492);
+      b = 255;
+    }
+
+    const clamp = (v: number) => Math.max(0, Math.min(255, Math.round(v)));
+    return { r: clamp(r), g: clamp(g), b: clamp(b) };
+  }
+
+  private _kelvinToHex(kelvin: number): string {
+    return this._rgbToHex(this._kelvinToRgb(kelvin));
+  }
+
   private _hexToRgb(hex: string): RGB | null {
     const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!match) return null;
@@ -250,6 +276,11 @@ export class LightEntityDialog extends LitElement {
         ? Math.round(1_000_000 / attrs.min_mireds)
         : 6500;
 
+    const tempValue = this._colorTemp ?? (minKelvin + maxKelvin) / 2;
+    const tempColor = this._kelvinToHex(tempValue);
+    const tempMinColor = this._kelvinToHex(minKelvin);
+    const tempMaxColor = this._kelvinToHex(maxKelvin);
+
     const showColorTemp =
       this._config.show_color_temp !== false && this._supportsColorTemp(entity);
     const showColor =
@@ -271,7 +302,7 @@ export class LightEntityDialog extends LitElement {
               </div>
               <div class="slider-wrapper">
                 <ha-control-slider
-                  .value=${this._colorTemp ?? (minKelvin + maxKelvin) / 2}
+                  .value=${tempValue}
                   .min=${minKelvin}
                   .max=${maxKelvin}
                   step="50"
@@ -280,8 +311,15 @@ export class LightEntityDialog extends LitElement {
                   show-handle
                   tooltip-position="right"
                   unit="K"
+                  style=${`--control-slider-color: ${tempColor};`}
                   @value-changed=${this._onColorTempChange}
-                ></ha-control-slider>
+                >
+                  <div
+                    slot="background"
+                    class="ct-background"
+                    style=${`background: linear-gradient(to top, ${tempMinColor}, ${tempMaxColor});`}
+                  ></div>
+                </ha-control-slider>
               </div>
               <div class="value">
                 ${this._colorTemp != null ? `${this._colorTemp} K` : nothing}
@@ -416,6 +454,11 @@ export class LightEntityDialog extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .ct-background {
+      border-radius: var(--control-slider-border-radius);
+      opacity: 0.35;
     }
 
     .color-wrapper {
