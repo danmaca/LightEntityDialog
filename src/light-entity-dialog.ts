@@ -19,12 +19,12 @@ export class LightEntityDialog extends LitElement {
   @state() private _config!: LightEntityDialogConfig;
   @state() private _brightnessPct: number | null = null;
   @state() private _colorTemp: number | null = null;
-  
+
   // Native color picker state
   @state() private _currentHue: number = 0; // 0-360
   @state() private _markerX: number = 0; // 0-100 percentage
   @state() private _markerY: number = 0; // 0-100 percentage
-  
+
   @query(".color-gradient") private _gradientArea!: HTMLDivElement;
 
   private _colorDebounceTimer: number | null = null;
@@ -209,17 +209,17 @@ export class LightEntityDialog extends LitElement {
   }
 
   private _onBrightnessChange(ev: CustomEvent): void {
-    const value = ev.detail && typeof ev.detail.value === "number" 
-      ? ev.detail.value 
+    const value = ev.detail && typeof ev.detail.value === "number"
+      ? ev.detail.value
       : Number((ev.target as HTMLInputElement).value);
-      
+
     this._brightnessPct = value;
     this._callService({ brightness_pct: value, transition: 0.2 });
   }
 
   private _onColorTempChange(ev: CustomEvent): void {
-    const value = ev.detail && typeof ev.detail.value === "number" 
-      ? ev.detail.value 
+    const value = ev.detail && typeof ev.detail.value === "number"
+      ? ev.detail.value
       : Number((ev.target as HTMLInputElement).value);
 
     this._colorTemp = value;
@@ -265,7 +265,7 @@ export class LightEntityDialog extends LitElement {
   private _onDragColor(e: MouseEvent | TouchEvent) {
     if (!this._gradientArea) return;
     if (e.cancelable) e.preventDefault();
-    
+
     const rect = this._gradientArea.getBoundingClientRect();
     let clientX, clientY;
 
@@ -359,7 +359,7 @@ export class LightEntityDialog extends LitElement {
 
       <div class="sliders-row">
         ${showColorTemp
-          ? html`<div class="column color-temp-column">
+        ? html`<div class="column color-temp-column">
 
               <div class="slider-wrapper">
                 <ha-control-slider
@@ -379,9 +379,8 @@ export class LightEntityDialog extends LitElement {
                   </div>
                 </ha-control-slider>
               </div>
-              <div class="value">${this._colorTemp != null ? `${this._colorTemp} K` : nothing}</div>
             </div>`
-          : nothing}
+        : nothing}
 
         <div class="column brightness-column">
 
@@ -393,16 +392,17 @@ export class LightEntityDialog extends LitElement {
               @value-changed=${this._onBrightnessChange}
             ></ha-control-slider>
           </div>
-          <div class="value">${this._brightnessPct != null ? `${this._brightnessPct}%` : nothing}</div>
         </div>
 
         <div class="column power-column">
           <button class="power-btn" @click=${this._togglePower} title="Zapnout / Vypnout">
             <svg viewBox="0 0 100 100" class="power-icon">
               <!-- Background matched roughly to dark theme -->
-              <circle cx="50" cy="50" r="50" fill="#272727" />
+              <circle cx="50" cy="50" r="50" fill=${isOn ? "#525252ff" : "#272727"} />
               <!-- Power symbol paths -->
-              <path d="M50 26 V52 M32 38 A 28 28 0 1 0 68 38" stroke=${isOn ? "#ffffff" : "#b0b0b0"} stroke-width="8" stroke-linecap="round" fill="none" />
+              <g transform="translate(0, -6)">
+                <path d="M50 26 V52 M32 38 A 28 28 0 1 0 68 38" stroke=${isOn ? "#ffffff" : "#b0b0b0"} stroke-width="8" stroke-linecap="round" fill="none" />
+              </g>
             </svg>
           </button>
         </div>
