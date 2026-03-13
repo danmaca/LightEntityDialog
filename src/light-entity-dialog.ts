@@ -214,7 +214,13 @@ export class LightEntityDialog extends LitElement {
       : Number((ev.target as HTMLInputElement).value);
 
     this._brightnessPct = value;
-    this._callService({ brightness_pct: value, transition: 0.2 });
+    if (value === 0) {
+      if (this._entity) {
+        this.hass.callService("light", "turn_off", { entity_id: this._entity.entity_id });
+      }
+    } else {
+      this._callService({ brightness_pct: value, transition: 0.2 });
+    }
   }
 
   private _onColorTempChange(ev: CustomEvent): void {
@@ -386,9 +392,10 @@ export class LightEntityDialog extends LitElement {
 
           <div class="slider-wrapper">
             <ha-control-slider
-              .value=${this._brightnessPct ?? (isOn ? 100 : 0)}
-              min="1" max="100" step="1"
-              mode="start" vertical show-handle unit="%"
+              .value=${isOn ? (this._brightnessPct ?? 100) : 0}
+              min="0" max="100" step="1"
+              mode="start" vertical ?show-handle=${isOn} unit="%"
+              style=${isOn ? "" : "--control-slider-color: transparent;"}
               @value-changed=${this._onBrightnessChange}
             ></ha-control-slider>
           </div>
